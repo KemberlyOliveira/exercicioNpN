@@ -14,15 +14,15 @@ public class Curso {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @Column(name = "id_aluno", unique = true, nullable = false)
+    @Column(name = "id_curso", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "nome_aluno", nullable = false, length = 50)
+    @Column(name = "nome_curso", nullable = false, length = 50)
     private String nome;
 
-    @Column(name = "cpf_aluno", nullable = false, unique = true, length = 15)
-    private String cpf;
+    @Column(name = "carga_horaria_curso", nullable = false, length = 5)
+    private String cargaHoraria;
 
-    @Column(name = "email_aluno", nullable = false, length = 100)
-    private String email;
+    @Column(name = "descricao_curso", nullable = false, length = 100)
+    private String descricao;
 }

@@ -22,8 +22,8 @@ public class AlunoController {
         this.alunoService = alunoService;
     }
 
-    @GetMapping("/listarTodosAlunos")
-    public String ListarTodosAlunos(Model oModel) {
+    @GetMapping("/listarAlunos")
+    public String listarAlunos(Model oModel) {
         oModel.addAttribute("listAlunos", alunoService.listarAlunos());
         return "listarAlunos";
     }
@@ -35,13 +35,16 @@ public class AlunoController {
         return "cadastrarAluno";
     }
 
-    @PostMapping("/salvarAluno")
-    public String salvarAluno( Aluno oAluno, Model oModel) {
-
+@PostMapping("/salvarAluno")
+public String salvarAluno(@ModelAttribute("aluno") Aluno oAluno, Model oModel) {
+    try {
         alunoService.salvarAluno(oAluno);
-
         return "redirect:/alunoCTR/listarAlunos";
+    } catch (IllegalArgumentException ex) {
+        oModel.addAttribute("errorMessage", ex.getMessage());
+        return "listarAlunos";
     }
+}
     
 
     @GetMapping("/deletarAluno/{id}")
