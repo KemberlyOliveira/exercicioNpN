@@ -5,13 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
 import lombok.Data;
 
 @Entity
-@Table(name = "aluno")
+@Table(name = "curso")
 @Data
-public class Aluno {
+public class Curso {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -26,5 +25,4 @@ public class Aluno {
 
     @Column(name = "email_aluno", nullable = false, length = 100)
     private String email;
-
 }

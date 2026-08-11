@@ -1,7 +1,5 @@
 package com.example.projetoN.execicioN.Controller;
 
-// Importações do Spring Framework para controle de rotas, injeção de dependência e modelos
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +16,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/alunoCTR")
 public class AlunoController {
 
-    @Autowired
-    private AlunoService oAlunoService;
+    private final AlunoService alunoService;
 
+    public AlunoController(AlunoService alunoService) {
+        this.alunoService = alunoService;
+    }
 
-    @GetMapping("/listarAlunos")
-    public String telaListarAlunos(Model oModel) {
-        oModel.addAttribute("alunos", oAlunoService.listarAlunos());
+    @GetMapping("/listarTodosAlunos")
+    public String ListarTodosAlunos(Model oModel) {
+        oModel.addAttribute("listAlunos", alunoService.listarAlunos());
         return "listarAlunos";
     }
 
@@ -35,18 +35,18 @@ public class AlunoController {
         return "cadastrarAluno";
     }
 
-
     @PostMapping("/salvarAluno")
-    public String cadastrarAluno(@ModelAttribute Aluno oAluno) {
+    public String salvarAluno( Aluno oAluno, Model oModel) {
 
-        oAlunoService.cadastrarAluno(oAluno);
+        alunoService.salvarAluno(oAluno);
 
         return "redirect:/alunoCTR/listarAlunos";
     }
+    
 
     @GetMapping("/deletarAluno/{id}")
     public String deletarAluno(@PathVariable Long id) {
-        oAlunoService.deletarAluno(id);
+        alunoService.deletarAluno(id);
 
         return "redirect:/alunoCTR/listarAlunos";
     }

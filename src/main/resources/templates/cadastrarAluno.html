@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Aluno</title>
+</head>
+<body>
+    
+    <h2>Formulário de Aluno</h2>
+
+    <form th:action="@{/alunoCTR/salvarAluno}" th:object="${aluno}" method="POST">
+        
+        <input type="hidden" th:field="*{id}" />
+
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}" required />
+        </div>
+        <br>
+        
+        <div>
+            <label for="cpf">CPF:</label>
+            <!-- Alterado de cpf_aluno para cpf -->
+            <input type="text" id="cpf" th:field="*{cpf}" required />
+        </div>
+        <br>
+
+        <div>
+            <label for="email">E-mail:</label>
+            <!-- Alterado de email_aluno para email -->
+            <input type="email" id="email" th:field="*{email}" required />
+        </div>
+        <br>
+
+        <button type="submit">Salvar Aluno</button>
+    </form>
+
+    <br>
+    <!-- Ajustado também o link de voltar para corresponder ao seu Controller ("/listarTodosAlunos") -->
+    <a th:href="@{/alunoCTR/listarTodosAlunos}">Voltar para a Listagem de Alunos</a>
+
+</body>
+</html>
