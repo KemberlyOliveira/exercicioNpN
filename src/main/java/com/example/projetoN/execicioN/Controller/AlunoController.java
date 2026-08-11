@@ -8,7 +8,6 @@ import com.example.projetoN.execicioN.Entity.Aluno;
 import com.example.projetoN.execicioN.Service.AlunoService;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -35,17 +34,13 @@ public class AlunoController {
         return "cadastrarAluno";
     }
 
-@PostMapping("/salvarAluno")
-public String salvarAluno(@ModelAttribute("aluno") Aluno oAluno, Model oModel) {
-    try {
+    @PostMapping("/salvarAluno")
+    public String salvarAluno(Aluno oAluno, Model oModel) {
+
         alunoService.salvarAluno(oAluno);
+
         return "redirect:/alunoCTR/listarAlunos";
-    } catch (IllegalArgumentException ex) {
-        oModel.addAttribute("errorMessage", ex.getMessage());
-        return "listarAlunos";
     }
-}
-    
 
     @GetMapping("/deletarAluno/{id}")
     public String deletarAluno(@PathVariable Long id) {

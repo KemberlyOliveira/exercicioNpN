@@ -7,5 +7,5 @@ import com.example.projetoN.execicioN.Entity.Aluno;
 
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
-    boolean existsByCpf(String cpf);
+    
 }

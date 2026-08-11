@@ -15,31 +15,30 @@ public class CursoService {
         this.cursoRepository = cursoRepository;
     }
 
-    public Curso obterCursoPorId(Long id) {  // ✅ Renomeado
+    public Curso buscarCursoPorId(Long id) {  
         return cursoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado com ID: " + id));
     }
 
-    public Curso salvarCurso(Curso oCurso) {  // ✅ Renomeado
+    public Curso salvarCurso(Curso oCurso) {  
         return cursoRepository.save(oCurso);
     }
 
     public List<Curso> listarCursos() {
         return cursoRepository.findAll();
     }
-
     public Curso alterarCurso(Long id, Curso oAltCurso) {
-        Curso cursoExistente = obterCursoPorId(id);  // ✅ Usando novo nome
-
+        Curso cursoExistente = buscarCursoPorId(id);
+    
         cursoExistente.setNome(oAltCurso.getNome());
-        cursoExistente.setcargaHoraria(oAltCurso.getcargaHoraria());
-        cursoExistente.setdescricao(oAltCurso.getdescricao());
-
+        cursoExistente.setCargaHoraria(oAltCurso.getCargaHoraria());  
+        cursoExistente.setDescricao(oAltCurso.getDescricao());       
+    
         return cursoRepository.save(cursoExistente);
     }
 
     public void deletarCurso(Long id) {
-        Curso cursoExistente = obterCursoPorId(id);  // ✅ Tipo correto
+        Curso cursoExistente = buscarCursoPorId(id); 
         cursoRepository.delete(cursoExistente);
     }
 }
