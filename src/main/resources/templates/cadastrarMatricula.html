@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Matrícula</title>
+</head>
+<body>
+
+    <h2>Registrar Nova Matrícula</h2>
+
+    <form th:action="@{/matriculas/salvarMatricula}" th:object="${matriculaDTO}" method="POST">
+        
+        <div>
+            <label for="alunoId">Selecione o Aluno:</label>
+            <select id="alunoID" th:field="*{alunoID}" required>
+                <option value=""> Escolha um Aluno </option>
+                <!-- O th:value guarda o ID (que vai pro banco), e o th:text mostra o Nome para o usuário -->
+                <option th:each="aluno : ${listAlunos}"
+                        th:value="${aluno.id}"
+                        th:text="${aluno.nome_aluno} + ' (Matricula: ' + ${aluno.matricula} + ')'">
+                </option>
+            </select>
+        </div>
+        <br>
+        
+        <div>
+            <label for="cursoId">Selecione o Curso:</label>
+            <select id="cursoID" th:field="*{cursoID}" required>
+                <option value=""> Escolha um Curso </option>
+                <option th:each="curso : ${listCursos}"
+                        th:value="${curso.id}"
+                        th:text="${curso.nome_curso}">
+                </option>
+            </select>
+        </div>
+        <br>
+
+        <div>
+            <label for="data_matricula">Data da Matrícula:</label>
+            <input type="text" id="data_matricula" th:field="*{data_matricula}" placeholder="DD/MM/AAAA" required />
+        </div>
+        <br>
+
+        <div>
+            <label for="status">Status:</label>
+            <select id="status" th:field="*{status}" required>
+                <option value="ATIVA">Ativa</option>
+                <option value="TRANCADA">Trancada</option>
+                <option value="FINALIZADA">Finalizada</option>
+            </select>
+        </div>
+        <br>
+
+        <div>
+            <label for="notaFinal">Nota Final (Opcional):</label>
+            <input type="number" step="0.1" id="notaFinal" th:field="*{notaFinal}" />
+        </div>
+        <br>
+
+        <button type="submit">Efetivar Matrícula</button>
+    </form>
+
+    <br>
+    <a th:href="@{/matriculas/listarMatriculas}">Voltar para a Listagem</a>
+
+</body>
+</html>

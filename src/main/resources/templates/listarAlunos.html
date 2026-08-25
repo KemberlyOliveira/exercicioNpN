@@ -27,7 +27,7 @@
                 <td th:text="${aluno.email}"></td>
 
                 <td>
-                    <a th:href="@{/alunoCTR/formEditar/{id}(id=${aluno.id})}">Editar</a> |
+                    <a th:href="@{/alunoCTR/fromAlterar/{id}(id=${aluno.id})}">Editar</a> |
                     <a th:href="@{/alunoCTR/deletarAluno/{id}(id=${aluno.id})}" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
                 </td>
             </tr>
