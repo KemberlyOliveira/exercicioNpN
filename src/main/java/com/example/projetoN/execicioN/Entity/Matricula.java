@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 // Entidade JPA que representa a matrícula de um Aluno em um Curso.
@@ -26,12 +27,12 @@ public class Matricula {
     // relacionamentos polimórficos e normalmente precisa de configuração extra
     // (@AnyDiscriminator, @AnyKeyJavaClass, etc.). O uso mais comum para este
     // caso costuma ser @ManyToOne (relação simples N:1 com Aluno).
-    @ManyToAny
+    @ManyToOne
     @JoinColumn(name = "id_aluno", nullable = false)
     private Aluno aluno;
 
     // Referência ao curso da matrícula (mesma observação sobre @ManyToAny acima)
-    @ManyToAny
+    @ManyToOne
     @JoinColumn(name = "id_curso", nullable = false)
     private Curso curso;
 

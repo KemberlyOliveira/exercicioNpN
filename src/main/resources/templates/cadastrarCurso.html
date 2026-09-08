@@ -8,8 +8,10 @@
 
     <h2>Formulário de Curso</h2>
 
+    <!-- Formulário vinculado ao objeto "curso" enviado pelo Controller -->
     <form th:action="@{/curso/salvarCurso}" th:object="${curso}" method="POST">
         
+        <!-- Campo oculto com o ID, usado para diferenciar cadastro de edição -->
         <input type="hidden" th:field="*{id}" />
 
         <div>
@@ -20,6 +22,8 @@
         
         <div>
             <label for="cargaHoraria">Carga Horária:</label>
+            <!-- Atenção: no Entity Curso o campo "cargaHoraria" é do tipo String,
+                 mas aqui o input é do tipo "number" -->
             <input type="number" id="cargaHoraria" th:field="*{cargaHoraria}" required />
         </div>
         <br>
@@ -34,6 +38,8 @@
     </form>
 
     <br>
+    <!-- Atenção: no CursoController o endpoint real é "/curso/listarCursos",
+         este link está apontando para "/curso/listarCurso" (sem "s"), que não existe -->
     <a th:href="@{/curso/listarCurso}">Voltar para a Listagem</a>
 
 </body>

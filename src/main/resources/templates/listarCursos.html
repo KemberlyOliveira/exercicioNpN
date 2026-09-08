@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Cursos</title>
+    <!-- Estilização simples da tabela de cursos -->
     <style>
         table { width: 70%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
@@ -25,6 +26,7 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Percorre a lista "listarCursos" enviada pelo CursoController -->
             <tr th:each="cursoItem : ${listarCursos}">
                 <td th:text="${cursoItem.id}"></td>
                 <td th:text="${cursoItem.nome}"></td>
@@ -32,13 +34,17 @@
                 <td th:text="${cursoItem.descricao}"></td>
 
                 <td>
+                    <!-- Atenção: no CursoController o endpoint de edição está comentado
+                         (desativado), então este link "/curso/editar/{id}" não existe ainda -->
                     <a th:href="@{/curso/editar/{id}(id=${cursoItem.id})}">Editar</a> |
+                    <!-- Link para excluir o curso, com confirmação via JavaScript -->
                     <a th:href="@{/curso/deletarCurso/{id}(id=${cursoItem.id})}" onclick="return confirm('Tem certeza que deseja excluir este curso?');">Excluir</a>
                 </td>
             </tr>
         </tbody>
     </table>
 
+    <!-- Link para ir até o formulário de cadastro de novo curso -->
     <a th:href="@{/curso/formCadastrar}">+ Cadastrar Novo Curso</a>
 </body>
 </html>

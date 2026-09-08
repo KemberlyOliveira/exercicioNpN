@@ -20,6 +20,7 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Percorre a lista "listAlunos" enviada pelo AlunoController -->
             <tr th:each="aluno : ${listAlunos}">
                 <td th:text="${aluno.id}"></td>
                 <td th:text="${aluno.nome}"></td>
@@ -27,13 +28,16 @@
                 <td th:text="${aluno.email}"></td>
 
                 <td>
+                    <!-- Link para editar: chama o endpoint fromAlterar/{id} do AlunoController -->
                     <a th:href="@{/alunoCTR/fromAlterar/{id}(id=${aluno.id})}">Editar</a> |
+                    <!-- Link para excluir, com confirmação via JavaScript antes de seguir o link -->
                     <a th:href="@{/alunoCTR/deletarAluno/{id}(id=${aluno.id})}" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
                 </td>
             </tr>
         </tbody>
     </table>
 
+    <!-- Link para ir até o formulário de cadastro de novo aluno -->
     <a th:href="@{/alunoCTR/formCadastrar}">+ Cadastrar Novo Aluno</a>
 
 </body>

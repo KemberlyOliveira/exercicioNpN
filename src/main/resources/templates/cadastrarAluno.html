@@ -8,8 +8,12 @@
     
     <h2>Formulário de Aluno</h2>
 
+    <!-- Formulário vinculado ao objeto "aluno" enviado pelo Controller (th:object).
+         O method POST envia os dados para o endpoint /alunoCTR/salvarAluno -->
     <form th:action="@{/alunoCTR/salvarAluno}" th:object="${aluno}" method="POST">
         
+        <!-- Campo oculto com o ID: importante para diferenciar cadastro (id nulo)
+             de edição (id preenchido) -->
         <input type="hidden" th:field="*{id}" />
 
         <div>
@@ -37,6 +41,8 @@
 
     <br>
     <!-- Ajustado também o link de voltar para corresponder ao seu Controller ("/listarTodosAlunos") -->
+    <!-- Atenção: no AlunoController o endpoint real é "/alunoCTR/listarAlunos" (sem "Todos"),
+         então este link provavelmente está apontando para uma rota que não existe -->
     <a th:href="@{/alunoCTR/listarTodosAlunos}">Voltar para a Listagem de Alunos</a>
 
 </body>

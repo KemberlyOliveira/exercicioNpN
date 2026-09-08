@@ -8,16 +8,21 @@
 
     <h2>Registrar Nova Matrícula</h2>
 
+    <!-- Formulário vinculado a um DTO "matriculaDTO" (não é a Entity Matricula diretamente,
+         e sim um objeto auxiliar provavelmente contendo alunoID e cursoID) -->
     <form th:action="@{/matriculas/salvarMatricula}" th:object="${matriculaDTO}" method="POST">
         
         <div>
             <label for="alunoId">Selecione o Aluno:</label>
-            <select id="alunoID" th:field="*{alunoID}" required>
+            <!-- Select populado com a lista de alunos vinda do Model (listAlunos) -->
+            <select id="alunoID" th:field="*{id_aluno}" required>
                 <option value=""> Escolha um Aluno </option>
                 <!-- O th:value guarda o ID (que vai pro banco), e o th:text mostra o Nome para o usuário -->
+                <!-- Atenção: a Entity Aluno possui os campos "nome" e não "nome_aluno",
+                     e não possui um campo "matricula". Isso pode gerar erro ao renderizar -->
                 <option th:each="aluno : ${listAlunos}"
                         th:value="${aluno.id}"
-                        th:text="${aluno.nome_aluno} + ' (Matricula: ' + ${aluno.matricula} + ')'">
+                        th:text="${aluno.nome}">
                 </option>
             </select>
         </div>
@@ -25,11 +30,13 @@
         
         <div>
             <label for="cursoId">Selecione o Curso:</label>
-            <select id="cursoID" th:field="*{cursoID}" required>
+            <!-- Select populado com a lista de cursos vinda do Model (listCursos) -->
+            <select id="id_curso" th:field="*{id_curso}" required>
                 <option value=""> Escolha um Curso </option>
-                <option th:each="curso : ${listCursos}"
-                        th:value="${curso.id}"
-                        th:text="${curso.nome_curso}">
+                <!-- Atenção: a Entity Curso possui o campo "nome", e não "nome_curso" -->
+                <option th:each="c : ${listCursos}"
+                        th:value="${c.id}"
+                        th:text="${c.nome}">
                 </option>
             </select>
         </div>
@@ -37,12 +44,13 @@
 
         <div>
             <label for="data_matricula">Data da Matrícula:</label>
-            <input type="text" id="data_matricula" th:field="*{data_matricula}" placeholder="DD/MM/AAAA" required />
+            <input type="text" id="dataMatricula" th:field="*{dataMatricula}" placeholder="DD/MM/AAAA" required />
         </div>
         <br>
 
         <div>
             <label for="status">Status:</label>
+            <!-- Lista fixa de opções de status da matrícula -->
             <select id="status" th:field="*{status}" required>
                 <option value="ATIVA">Ativa</option>
                 <option value="TRANCADA">Trancada</option>
