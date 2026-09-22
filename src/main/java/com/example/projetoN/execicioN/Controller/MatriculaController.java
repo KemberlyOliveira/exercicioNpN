@@ -9,10 +9,11 @@ import com.example.projetoN.execicioN.Service.AlunoService;
 import com.example.projetoN.execicioN.Service.CursoService;
 import com.example.projetoN.execicioN.Service.MatriculaService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 @Controller
-@RequestMapping("MatriculaCTR")
+@RequestMapping("matriculaCTR")
 public class MatriculaController {
 
     private final MatriculaService oMatriculaService;
@@ -28,16 +29,14 @@ public class MatriculaController {
         this.oAlunoService = oAlunoService;
     }
 
-    @GetMapping("/listarMatriculas")
+    @GetMapping("/listar")
     public String listMatriculas(Model oModel) {
-
         oModel.addAttribute("matricula", oMatriculaService.listarTodasMatriculas());
         return "listarMatriculas";
     }
 
     @GetMapping("/formCadastrar")
     public String showFormCadastrarMatricula(Model oModel) {
-
         oModel.addAttribute("matriculaDTO", new MatriculaDTO());
         oModel.addAttribute("listAlunos", oAlunoService.listarAlunos());
         oModel.addAttribute("listCursos", oCursoService.listarCursos());
@@ -45,4 +44,15 @@ public class MatriculaController {
         return "cadastrarMatricula";
     }
 
+    @PostMapping("/salvarMatricula")
+    public String salvarMatricula(MatriculaDTO oMatriculaDTO) {
+        if (oMatriculaDTO.getId_matricula() == null) {
+            oMatriculaService.salvarMatricula(oMatriculaDTO);
+        } else {
+            oMatriculaService.editarMatricula(oMatriculaDTO.getId_matricula(), oMatriculaDTO);
+        }
+        
+        // CORRIGIDO: Redirecionando para a URL correta mapeada no @GetMapping("/listar")
+        return "redirect:/matriculaCTR/listar";
+    }
 }

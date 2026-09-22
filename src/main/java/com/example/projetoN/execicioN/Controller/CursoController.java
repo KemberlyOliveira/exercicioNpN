@@ -12,7 +12,7 @@ import com.example.projetoN.execicioN.Service.CursoService;
 
 // Controller responsável pelas requisições HTTP relacionadas a Curso
 @Controller
-@RequestMapping("/curso") // Prefixo de rota para os endpoints de curso
+@RequestMapping("/cursoCTR") // Prefixo de rota para os endpoints de curso
 public class CursoController {
 
     // Injeção de dependência do serviço de Curso via construtor
@@ -23,7 +23,7 @@ public class CursoController {
     }
 
     // Endpoint GET para listar todos os cursos cadastrados
-    @GetMapping("/listarCursos")
+    @GetMapping("/listar")
     public String listarCursos(Model oModel) {
         oModel.addAttribute("listarCursos", cursoService.listarCursos());
         return "listarCursos"; 

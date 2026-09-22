@@ -25,7 +25,7 @@ public class AlunoController {
     }
 
     // Endpoint GET para listar todos os alunos cadastrados
-    @GetMapping("/listarAlunos")
+    @GetMapping("/listar")
     public String listarAlunos(Model oModel) {
         // Adiciona a lista de alunos ao Model para ser exibida na view "listarAlunos"
         oModel.addAttribute("listAlunos", alunoService.listarAlunos());
